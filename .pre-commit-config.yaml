@@ -1,0 +1,37 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+      - id: cmake-lint
+        args: ['-l error']
+
+  - repo: local
+    hooks:
+      - id: clang-tidy
+        name: clang-tidy
+        description: Lint files with ClangTidy.
+        entry: run-clang-tidy
+        args: ['-p=build', '-fix']
+        language: system
+      - id: clang-format
+        name: clang-format
+        description: Format files with ClangFormat.
+        entry: clang-format
+        args: ['-i']
+        language: system
+        files: \.(c|cc|cxx|cpp|frag|glsl|h|hpp|hxx|ih|ispc|ipp|java|js|m|proto|vert)$

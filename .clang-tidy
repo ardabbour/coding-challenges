@@ -1,0 +1,8 @@
+---
+Checks: >
+  bugprone-*,
+  concurrency-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,

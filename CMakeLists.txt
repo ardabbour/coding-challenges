@@ -27,3 +27,5 @@ option(${PROJECT}_ENABLE_TESTING "Enables testing" ON)
 if(${PROJECT}_ENABLE_TESTING)
   enable_testing()
 endif()
+
+add_subdirectory(001-wc-tool)

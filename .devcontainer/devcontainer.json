@@ -1,0 +1,22 @@
+{
+	"name": "Existing Dockerfile",
+	"build": {
+		"dockerfile": "./Dockerfile",
+		"context": "."
+	},
+	"capAdd": ["SYS_PTRACE"],
+	"securityOpt": ["seccomp=unconfined"],
+	"mounts": [
+		"source=coding-challenges-.commandhistory,target=/root/.commandhistory,type=volume",
+		"source=coding-challenges-.ccache,target=/root/.ccache,type=volume"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"llvm-vs-code-extensions.vscode-clangd",
+				"twxs.cmake",
+				"cheshirekow.cmake-format"
+			]
+		}
+	}
+}

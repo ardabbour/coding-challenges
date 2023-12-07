@@ -6,37 +6,24 @@ Solutions to the [Coding Challenges](https://codingchallenges.fyi/challenges/int
 
 ### Prerequisites
 
-#### Local
-
 - CMake
+- cppcheck
+- clang-tidy
 - a C++20 compiler
-
-#### Container
-
-- Docker
-- Docker Compose
 
 ### Instructions
 
 To build the solutions, run:
 
 ```bash
-cmake -B build
-cmake --build build
+PROJECT_DIR=$(pwd) # assuming you are in the root folder of the project
+BUILD_TYPE=Release
+BUILD_DIR=$PROJECT_DIR/build
+cmake -B $BUILD_DIR -DCMAKE_BUILD_TYPE=$BUILD_TYPE # configure
+cmake --build $BUILD_DIR --config $BUILD_TYPE # build
+ctest --test-dir $BUILD_DIR -C $BUILD_TYPE # test
+cmake --install $BUILD_DIR --config $BUILD_TYPE # install
 ```
-
-If you want to use the containerized development environment, run:
-
-```bash
-docker compose up -d
-```
-
-then log into the container in any way you like, for example:
-
-```bash
-docker exec -it coding-challenges-devenv-1 zsh
-```
-
 
 ## Challenges
 

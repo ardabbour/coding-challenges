@@ -7,7 +7,7 @@ target_link_libraries(ccwc ccwc_lib)
 
 install(TARGETS ccwc RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-if(${PROJECT}_ENABLE_TESTING)
+if(BUILD_TESTING)
   add_executable(test_ccwc test.cpp)
   add_dependencies(test_ccwc ccwc_lib)
   target_link_libraries(test_ccwc ccwc_lib)

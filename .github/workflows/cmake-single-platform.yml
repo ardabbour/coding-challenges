@@ -8,20 +8,26 @@ on:
 
 env:
   BUILD_TYPE: Release
+  BUILD_DIR: ${{github.workspace}}/build
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v4
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    - name: Install clang-tidy and cppcheck
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends -y clang-tidy cppcheck
+
+    - name: Configure
+      run: cmake -B ${{env.BUILD_DIR}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{env.BUILD_DIR}} --config ${{env.BUILD_TYPE}}
 
     - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}}
+      run: ctest --test-dir ${{env.BUILD_DIR}} -C ${{env.BUILD_TYPE}}
